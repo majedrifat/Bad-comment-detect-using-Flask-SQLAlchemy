@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+   <body>
+       <h3>
+         <a>Post - Flask & SQLAlchemy </a>
+      </h3>
+      <hr/>
+      
+      {%- for category, message in get_flashed_messages(with_categories = true) %}
+         <div class = "alert alert-danger">
+            {{ message }}
+         </div>
+      {%- endfor %}
+      
+      <form action = "{{ request.path }}" method = "post">
+        
+         <label for = "addr">Comment</label><br>
+         <textarea name = "addr" maxlength="140" rows="6" cols="70" placeholder = "Put your comment here . Comment limit 140 characters "></textarea><br>
+        
+         <input type = "submit" value = "Post" />
+      </form>
+<!-- start to show DB  -->
+
+    
+      
+      <hr/>
+    {% with messages = get_flashed_messages() %}
+      {%- for message in messages %}
+         {{ message }}
+      {%- endfor %}
+    {% endwith %}
+      <h3>Post(<a href = "{{ url_for('new') }}">Page Refresh 
+         </a>)</h3>
+      
+      <table>
+         <thead>
+            <tr>
+              
+               <th>Comments</th>
+              
+            </tr>
+         </thead>
+
+         <tbody>
+            {% for Comment in Comments %}
+               <tr>
+                  
+                  <td>{{ Comment.addr }}</td>
+                
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+   </body>
+</html>
